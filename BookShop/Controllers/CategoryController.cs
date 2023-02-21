@@ -1,5 +1,6 @@
 ﻿using BookShop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.Controllers
 {
@@ -12,6 +13,7 @@ namespace BookShop.Controllers
         }
         public IActionResult Index()
         {
+            var result = dbContext.categories.Where(c => c.status == 1 || c.status == 2).ToList();
             return View();
         }
 
