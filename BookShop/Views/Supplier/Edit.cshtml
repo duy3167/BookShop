@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Supplier";
+    Layout = "_ManagementLayout";
+}
+
+<form action="/supplier-add" method="post" id="sup_form">
+    <div class="modal-body">
+        <label for="txt_sup_name">Supplier name</label>
+        <input type="text" placeholder="supplier name" id="txt_sup_name" class="form-control mb-1" required>
+        <label for="txt_address">Address</label>
+        <input type="text" placeholder="supplier address" id="txt_address" class="form-control" required>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </div>
+</form>

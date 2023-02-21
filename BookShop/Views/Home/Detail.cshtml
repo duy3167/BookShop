@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Book";
+    Layout = "_CustomerLayout";
+}
+
+@section Styles{
+    <link href="~/css/share/animation-loading.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/customer/detail-product.css" rel="stylesheet" asp-append-version="true" />
+}
+
+@model Book
+
+<div class="wrapper">
+    <div class="product-img">
+        <img src="~/img/book/@Model.image" height="420" width="327">
+    </div>
+    <div class="product-info">
+        <div class="product-text">
+            <h1>@Model.title</h1>
+            <h2 style="color:rgb(32, 50, 71)">by Author</h2>
+            <p>Category: @Model.category.name </p>
+            <p>Supplier: @Model.supplier.name  </p>
+            <p>Publishing date: @Model.publishing_year  </p>
+            <p>quantity: @Model.quantity</p>
+            <p style="text-align: justify;">@Model.description</p>
+        </div>
+        <div class="product-price-btn">
+            <p><span>@Model.price</span>$</p>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.book_id"> <button type="button">Add to cart</button> </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+}

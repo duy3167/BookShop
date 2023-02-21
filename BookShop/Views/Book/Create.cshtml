@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Product";
+    Layout = "_ManagementLayout";
+}
+@model Book
+<div style="padding:1rem">
+    <form asp-action="Create" method="post" id="pro_form">
+        <div class="mb-4">
+            <label for="pro_name" class="form-label">Title</label>
+            <input type="text" asp-for="title" class="form-control" style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="pro_name" class="form-label">Author</label>
+            <input type="text" asp-for="author" class="form-control"  style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="pro_cate" class="form-label">Category</label>
+            <select class="form-control" asp-for="cate_id" style="display: inline-block" required>
+                <option value="">Choose category</option>
+                @foreach (var category in (List<Category>)ViewData["cateList"])
+                {
+                    <option value="@category.cate_id">@category.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="pro_sup" class="form-label">Supplier</label>
+            <select class="form-control" asp-for="sup_id" id="pro_sup" style="display: inline-block" required>
+                <option value="">Choose supplier</option>
+                @foreach (var sup in (List<Supplier>)ViewData["supList"])
+                {
+                    <option value="@sup.sup_id">@sup.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="pro_price" class="form-label">Price</label>
+            <input type="number" asp-for="price" class="form-control"  style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="pro_quantity" class="form-label">Quantity</label>
+            <input type="number" asp-for="quantity" class="form-control"   style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="img_preview" class="form-label" id="lb_img">Image</label>
+            <div style="display: block">
+                <img src="~/img/deco/demo-image.jpg" alt="..." class="img-thumbnail" id="img_preview" style="width: 13rem;">
+            </div>
+            <input type="file" name="proImage" id="pro_img" hidden>
+            <button type="button" class="btn btn-primary mt-3" id="btn_open_dialog_image">Choose image</button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Add</button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/lib/image-helper/image-helper.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+             $('#btn_open_dialog_image').click(function (){
+                $('#empty_img').hide()
+                $('#pro_img').click()
+            })
+
+            $('#pro_img').change(function () {
+                imgHelper.previewImage()
+            })
+        })
+    </script>
+}

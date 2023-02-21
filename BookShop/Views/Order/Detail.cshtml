@@ -1,0 +1,32 @@
+﻿@{
+	ViewData["Title"] = "Order";
+	Layout = "_ManagementLayout";
+}
+
+<table class="table table-hover pt-10">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Image</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total price</th>
+        </tr>
+    </thead>
+    <tbody id="body-order-detail-table">
+        @for (int i = 0; i < 5; i++)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <th>book title</th>
+                <th>
+                    <img src="~/img/book/book_demo.jpg" style="width:8rem; height:9rem" />
+                </th>
+                <th>$123</th>
+                <th>1</th>
+                <th>$123</th>
+            </tr>
+        }
+    </tbody>
+</table>

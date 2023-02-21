@@ -1,0 +1,95 @@
+﻿@model User
+
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Register</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="icon" href="/images/icon-web.png">
+	<link rel="stylesheet" href="~/css/customer/login.css">
+	<link rel="stylesheet" href="~/css/share/loading-animation.css">
+</head>
+<body>
+	<!-- animation loading-->
+	<div class="overplay-animation">
+		<div class="loading-animation"></div>
+	</div>
+	<!--animation loading-->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap py-5">
+						<div class="d-flex align-items-center justify-content-center"><h1 class="animate-character">FPTBook</h1></div>
+						<h3 class="text-center mb-0">Register</h3>
+						<form asp-controller="Home" asp-action="Register" id="register_form" class="login-form" method="post">
+							<div class="form-group">
+								<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
+								<input asp-for="email" type="email" class="form-control" id="txt_username" placeholder="Email" required>
+								<span asp-validation-for="email" style="color:orangered"></span>
+							</div>
+							<div class="form-group">
+								<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
+								<input asp-for="password" type="password" class="form-control" id="txt_pass" placeholder="Password" required >
+								<span asp-validation-for="password" style="color:orangered"></span>
+							</div>
+							<div class="form-group">
+								<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
+								<input type="password" class="form-control" id="txt_confirm_pass" placeholder="Confirm password" required>
+							</div>
+							<div class="form-group">
+								<div class="icon d-flex align-items-center justify-content-center" style="height:22px!important"><span class="fa fa-venus-mars"></span></div>
+								<input type="radio" required asp-for="gender" value="male" style="cursor:pointer; margin-left:3rem"/> Male
+								<input type="radio" required asp-for="gender" value="female" style="cursor:pointer; margin-left:3rem" /> Female
+								<span asp-validation-for="gender" style="color:orangered"></span>
+							</div>
+							<div class="form-group">
+								<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-phone"></span></div>
+								<input type="text" class="form-control" asp-for="phone" placeholder="Phone" required>
+								<span asp-validation-for="phone" style="color:orangered"></span>
+							</div>
+							<div class="form-group">
+								<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-map"></span></div>
+								<input type="text" asp-for="address" class="form-control" id="txt_pass" placeholder="Address" required>
+								<span asp-validation-for="email" style="color:orangered"></span>
+							</div>
+							<div class="form-group d-md-flex">
+							</div>
+							<div class="error-login" id="error_register" style="color: red;">
+								@if (TempData.ContainsKey("error"))
+								{
+									<span>@TempData["error"].ToString()</span>
+								}
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn form-control btn-primary rounded submit px-3">Register</button>
+							</div>
+						</form>
+						<a asp-controller="Home" asp-action="Index" style=";">Home</a>
+						<a asp-controller="Home" asp-action="Login" style="float: right;">Login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+	$('#register_form').submit(function (e) {
+		if ($('#txt_pass').val().trim() !== $('#txt_confirm_pass').val().trim()){
+			e.preventDefault()
+			$('#error_register').html('Confirm password not match')
+		}
+	})
+</script>
+</html>
+

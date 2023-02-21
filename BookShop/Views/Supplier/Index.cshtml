@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Supplier";
+    Layout = "_ManagementLayout";
+}
+<div style="width: 100%;height: 4rem;background-color: white; position: fixed; z-index: 1;">
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="d-flex" id="search_box_product" role="search">
+                    <a asp-controller="Supplier" asp-action="Create"> 
+                        <button class="btn btn-warning" style="width: 8rem;margin-left: 2rem">New</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div style="padding-top: 5rem">
+    <table class="table table-hover" style="text-align:center">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < 10; i++)
+            {
+                <tr>
+                    <th scope="row">@(i+1)</th>
+                    <td>Supp name @i</td>
+                    <td> supp address @i</td>
+                    <td>
+                        <a asp-controller="Supplier" asp-action="Edit">
+                            <button class="btn btn-info" data-pro-id="@i">Update</button>
+                        </a>
+                        
+                        <button class="btn btn-danger btn-delete-pro" data-pro-id="@i">Delete</button>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>

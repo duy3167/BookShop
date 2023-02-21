@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Supper Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/images/icon-web.png">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/css/admin/dashboard.css">
+    <link rel="stylesheet" href="~/css/share/loading-animation.css">
+    <link href="~/css/share/text-animation.css" rel="stylesheet" />
+
+</head>
+<body>
+    <!--    animation loading-->
+    <div class="overplay-animation">
+        <div class="loading-animation"></div>
+    </div>
+    <!--    animation loading-->
+    <div class="container-fluid" style="height: 100%">
+        <div class="row h-100">
+            <div class="col-2" id="block_dashboard" style="position: fixed">
+                <div id="header_dashboard">
+                    <div id="title_dashboard"><h1 class="animate-character">SUPPER ADMIN</h1></div>
+                </div>
+                <div id="body_dashboard" style="margin-top:3rem">
+                    <a asp-controller="Category" asp-action="Index" style="text-decoration: none"><div class="controller-in-dashboard active"><i class="bi-tag-fill" aria-hidden="true"></i> Category </div></a>
+                    <a asp-controller="Home" asp-action="Index" style="text-decoration: none"><div class="controller-in-dashboard"><i class="bi-browser-chrome" aria-hidden="true"></i> Website </div></a>
+                    <a asp-controller="Management" asp-action="Logout" style="text-decoration: none; color: black"><div class="controller-in-dashboard"><i class="bi-box-arrow-left" aria-hidden="true"></i> Logout</div></a>
+                </div>
+            </div>
+            <div class="col" style="margin-left: 17rem;">
+                <div id="root_body">
+                    <div style="padding-top: 5rem">
+                        <table class="table table-hover" style="text-align:center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Category name</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < 10; i++)
+                                {
+                                    <tr>
+                                        <th scope="row">@(i + 1)</th>
+                                        <td>Cate name @i</td>
+                                        <td>
+                                            <button class="btn btn-info" data-pro-id="@i">Ok</button>
+                                            <button class="btn btn-danger btn-delete-pro" data-pro-id="@i">Refuse</button>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- jQery -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<!-- bootstrap js -->
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- owl slider -->
+
+</html>

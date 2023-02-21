@@ -1,0 +1,67 @@
+﻿@model User
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="icon" href="/images/icon-web.png">
+	<link rel="stylesheet" href="~/css/customer/login.css">
+	<link rel="stylesheet" href="~/css/share/loading-animation.css">
+  </head>
+	<body>
+<!-- animation loading-->
+<div class="overplay-animation">
+	<div class="loading-animation"></div>
+</div>
+<!--animation loading-->
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-6 col-lg-4">
+					<div class="login-wrap py-5">
+		      		<div class="d-flex align-items-center justify-content-center"><h1 class="animate-character">FPTBook</h1></div>
+		      		<h3 class="text-center mb-0">Welcome</h3>
+						<form asp-controller="Home" asp-action="Login" class="login-form" method="post">
+		      				<div class="form-group">
+		      						<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-user"></span></div>
+		      						<input type="text" class="form-control" asp-for="email" placeholder="Email" required>
+		      				</div>
+							<div class="form-group">
+	            				<div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-lock"></span></div>
+							  <input type="password" class="form-control" asp-for="password" placeholder="Password" required name="password">
+							</div>
+							<div class="form-group d-md-flex">
+
+							</div>
+							<div class="error-login" style="color: red;transform: translateX(17%);margin-bottom: 0.5rem;">
+								@if (TempData.ContainsKey("error"))
+								{
+									<span>@TempData["error"].ToString()</span>
+								}
+							</div>
+							<div class="form-group">
+	            				<button type="submit" class="btn form-control btn-primary rounded submit px-3">Login</button>
+							</div>
+						</form>
+						<a asp-controller="Home" asp-action="Index" style=";">Home</a>
+							<a asp-controller="Home" asp-action="Register" style="float: right;">Register</a>
+
+				</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+</html>
+

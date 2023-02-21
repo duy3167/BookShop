@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Category";
+    Layout = "_ManagementLayout";
+}
+
+<form action="/category-add" method="post" id="cate_form">
+    <div class="modal-body">
+        <label for="txt_sup_name">Category name</label>
+        <input type="text" placeholder="category name" id="txt_cate_name" class="form-control mb-1" required>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+</form>

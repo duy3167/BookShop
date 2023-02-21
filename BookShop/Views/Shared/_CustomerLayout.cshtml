@@ -1,0 +1,135 @@
+﻿@functions{
+    String CurrentPage(string name)
+    {
+        if (name.Equals(ViewData["title"]))
+        {
+            return "animate-character";
+        }
+        return "";
+    }
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" type="">
+
+    <title>@ViewData["title"]</title>
+
+
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="~/lib/owl-carousel/css/owl.carousel.min.css" />
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <!-- font awesome style -->
+    <link href="~/lib/font-awesome/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/css/customer/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/css/customer/responesive.css" rel="stylesheet" />    
+    
+    <!-- brand text aniamtion -->
+    <link href="~/css/share/text-animation.css" rel="stylesheet" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+
+<div class="hero_area">
+
+    <div class="hero_bg_box">
+        <img src="~/img/deco/hero-bg.png" alt="">
+    </div>
+
+    <!-- header section strats -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="index.html">
+            <span class="animate-character">
+              Book shop
+            </span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  ">
+                        <li class="nav-item ">
+                            <a class="nav-link @CurrentPage("Home")" asp-controller="Home" asp-action="Index">Home </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link @CurrentPage("Book")" asp-controller="Home" asp-action="Book"> Book</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link @CurrentPage("Profile")" asp-controller="Profile" asp-action="Index">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                             <a class="nav-link @CurrentPage("Cart")" asp-controller="Cart" asp-action="Index">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                             <a class="nav-link" asp-controller="Home" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                                @if (ViewData.ContainsKey("isLogin"))
+                                {
+                                    <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" asp-controller="Home" asp-action="Login">Login</a>
+                                }
+                                
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+
+    <!-- Content body -->
+    @RenderBody()
+    <!-- end Content body -->
+      
+        <!-- footer section -->
+<section class="footer_section">
+    <div class="container">
+        <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By Book shop
+        </p>
+    </div>
+</section>
+</body>
+<!-- footer section -->
+
+<!-- jQery -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<!-- popper js -->
+<script src="~/lib/popper/popper.min.js"></script>
+<!-- bootstrap js -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- owl slider -->
+<script type="text/javascript" src="~/lib/owl-carousel/js/owl.carousel.min.js"></script>
+<!-- custom js -->
+
+@await RenderSectionAsync("Scripts", required: false)
+</html>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Cart";
+    Layout = "_CustomerLayout";
+}
+
+@section Styles{
+	<link href="~/css/customer/cart.css" rel="stylesheet" />
+}
+<div class="card">
+	<div class="row">
+		<div class="col-md-7 cart">
+			<div class="title">
+				<div class="row">
+					<div class="col-8"><h4><b style="color: rgb(61, 194, 202)">Shopping Cart</b></h4></div>
+					<div class="col-2 align-self-center text-right text-muted">5 items</div>
+					<div class="col-2 align-self-center text-right text-muted" style="cursor:pointer">
+						<a asp-controller="Cart" asp-action="History" style="color: #6c757d!important">History</a>
+					</div>
+				</div>
+			</div>
+			@for (int i = 0; i < 5; i++)
+			{
+				<div class="row">
+					<div class="row main align-items-center">
+						<div class="col-2"><img class="img-fluid" src="~/img/book/book_demo.jpg"></div>
+						<div class="col">
+							<div class="row text-muted">Book Name</div>
+							<div class="row">Author name</div>
+						</div>
+						<div class="col">
+							<a>-</a>
+								<a class="border">1</a>
+							<a>+</a>
+						</div>
+						<div class="col">$ 10.00 <span class="close">&#10005;</span></div>
+					</div>
+				</div>
+			}
+		</div>
+		<div class="col-md-5 summary">
+			<div><h5><b>Summary</b></h5></div>
+			<hr>
+			<div class="row">
+				<div class="col-2" style="padding-left:0;">PHONE</div>
+				<div class="col-10 text-right" style="padding-left:1rem;">Phone of customer</div>
+			</div>
+			<div class="row">
+				<div class="col-2" style="padding-left:0;">ADDRESS</div>
+				<div class="col-10 text-right" style="padding-left:1rem;">Address of customer</div>
+			</div>
+			<div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+				<div class="col">TOTAL PRICE</div>
+				<div class="col text-right">$50.00</div>
+			</div>
+			<button class="btn">CHECKOUT</button>
+		</div>
+	</div>
+
+</div>
+
+@section Scripts{
+
+}
