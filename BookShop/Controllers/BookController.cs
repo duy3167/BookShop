@@ -11,16 +11,16 @@ namespace BookShop.Controllers
     public class BookController : Controller
     {
         private readonly AppDBContext dbContext;
-
+        private string zone { get; set; }
         public BookController(AppDBContext dbContext)
         {
             this.dbContext = dbContext;
-            
+            this.zone = "owner, admin";
         }
 
         public IActionResult Index()
         {
-            if (Authen() == false) return Unauthorized();
+            if (Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
 
             var book = dbContext.books.Where(b => b.status == 1).Include("category").Include("supplier").ToList();
             return View(book);
@@ -29,7 +29,7 @@ namespace BookShop.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            if (Authen() == false) return Unauthorized();
+            if (Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
 
             var cateList = await dbContext.categories.Where(c => c.status == 1).ToListAsync();
             var supList = await dbContext.suppliers.Where(s => s.status == 1).ToListAsync();
@@ -148,10 +148,5 @@ namespace BookShop.Controllers
 
         }
 
-        private bool Authen()
-        {
-            Authentication.Instance.BindingSession(HttpContext);
-            return Authentication.Instance.Authorization("owner, admin");
-        }
     }
 }

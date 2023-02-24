@@ -6,13 +6,13 @@ namespace BookShop.Utils
     {
         private static Authentication _instance;
         private const string KeyId = "Id";
-        public int userId { get; set; }
+        public int userId { get; private set; }
 
         private const string KeyEmail = "Email";
-        public string email { get; set; }
+        public string email { get; private set; }
 
         private const string KeyRole = "Role";
-        public string role { get; set; }
+        public string role { get; private set; }
 
         public static Authentication Instance
         {
@@ -26,30 +26,37 @@ namespace BookShop.Utils
             }
         }
         private Authentication() { }
-        public void BindingSession(HttpContext httpContext)
+
+        //get infor in session
+        public bool BindingSession(HttpContext httpContext)
         {
             if (!string.IsNullOrEmpty(httpContext.Session.GetString(KeyEmail)))
             {
                 this.userId = (int)httpContext.Session.GetInt32(KeyId);
                 this.email = httpContext.Session.GetString(KeyEmail);
                 this.role = httpContext.Session.GetString(KeyRole);
+                return true;
             }
+            return false;
         }
 
-        public bool Authorization(string zones)
+        //authentication user
+        public bool Authorization(HttpContext httpContext, string zones)
         {
-            List<string> zone = zones.Split(',').ToList();
-            bool result = false;
-            foreach (string z in zone)
+            if (BindingSession(httpContext) == true)
             {
-                if(this.role == z)
+                List<string> zoneList = zones.Split(',').ToList();
+                foreach (string zone in zoneList)
                 {
-                    result = true;
-                    break;
+                    if (this.role == zone)
+                    {
+                        return true;
+                    }
                 }
             }
-            return result;
+            return false;
         }
+
 
         public void SetSession(int userId, string email, string role, HttpContext httpContext)
         {
