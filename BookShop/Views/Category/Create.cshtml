@@ -2,14 +2,15 @@
     ViewData["Title"] = "Category";
     Layout = "_ManagementLayout";
 }
+@model Category
 
-<form action="/category-add" method="post" id="cate_form">
-    <div class="modal-body">
-        <label for="txt_sup_name">Category name</label>
-        <input type="text" placeholder="category name" id="txt_cate_name" class="form-control mb-1" required>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Add</button>
+<form asp-controller="Category" asp-action="Create" method="post" id="cate_form">
+    <label for="txt_sup_name">Category name</label>
+    <input type="text" asp-for="name" placeholder="category name" id="txt_cate_name" class="form-control mb-1" required>
+    <div style="float: right;">
+        <button type="submit" class="btn btn-success">Add</button>
+        <a asp-action="Index" asp-controller="Category">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+        </a>
     </div>
 </form>

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookShop.Migrations
 {
-    public partial class asdf : Migration
+    public partial class asdfas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,7 +70,6 @@ namespace BookShop.Migrations
                     author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    publishing_year = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     price = table.Column<float>(type: "real", nullable: false),
                     status = table.Column<int>(type: "int", nullable: true)
                 },

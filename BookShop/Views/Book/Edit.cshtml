@@ -1,5 +1,87 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Product";
+    Layout = "_ManagementLayout";
+}
+@model Book
+<div style="padding:1rem">
+    @if (TempData.ContainsKey("error"))
+    {
+        <div style="font-size:14px;color:red">@TempData["error"]</div>
+    }
+    <form asp-action="Edit" asp-controller="Book" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="book_id"></input>
+        <div class="mb-4">
+            <label for="pro_name" class="form-label">Title</label>
+            <input type="text" asp-for="title" class="form-control" style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="pro_name" class="form-label">Author</label>
+            <input type="text" asp-for="author" class="form-control" style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="pro_cate" class="form-label">Category</label>
+            <select class="form-control" asp-for="cate_id" style="display: inline-block" required>
+                <option value="">Choose category</option>
+                @foreach (var category in (List<Category>)ViewData["cateList"])
+                {
+                    <option value="@category.cate_id">@category.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-4">
+            <label for="pro_sup" class="form-label">Supplier</label>
+            <select class="form-control" asp-for="sup_id" id="pro_sup" style="display: inline-block" required>
+                <option value="">Choose supplier</option>
+                @foreach (var sup in (List<Supplier>)ViewData["supList"])
+                {
+                    <option value="@sup.sup_id">@sup.name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="form-label">Description</label>
+            <textarea asp-for="description" class="form-control" style="display: inline-block" required>
+
+            </textarea>
+            <span asp-validation-for="description" class="validate-mess"></span>
+        </div>
+        <div class="mb-4">
+            <label for="pro_price" class="form-label">Price</label>
+            <input type="number" asp-for="price" class="form-control" style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="pro_quantity" class="form-label">Quantity</label>
+            <input type="number" asp-for="quantity" class="form-control" style="display: inline-block" required>
+        </div>
+        <div class="mb-4">
+            <label for="img_preview" class="form-label" id="lb_img">Image</label>
+            <div style="display: block">
+                <img src="~/img/book/@Model.image" alt="..." class="img-thumbnail" id="img_preview" style="width: 13rem;">
+            </div>
+            <input type="file" asp-for="image" id="pro_img" hidden>
+            <button type="button" class="btn btn-primary mt-3" id="btn_open_dialog_image">Choose image</button>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success">Update</button>
+            <a asp-action="Index" asp-controller="Book">
+                <button type="button" class="btn btn-dark">Close</button>
+            </a>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/lib/image-helper/image-helper.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btn_open_dialog_image').click(function () {
+                $('#empty_img').hide()
+                $('#pro_img').click()
+            })
+
+            $('#pro_img').change(function () {
+                imgHelper.previewImage()
+            })
+        })
+    </script>
 }

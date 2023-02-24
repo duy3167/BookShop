@@ -42,26 +42,16 @@
             }
         }
 
-        public bool DeleteFileAsync(string fileName, string folder)
+        public void DeleteFileAsync(string fileName, string folder)
         {
             try
             {
                 string currentDirectory = Directory.GetCurrentDirectory();
                 string filePath = Path.Combine(currentDirectory, "wwwroot", folder, fileName);
-                if (File.Exists(filePath))
-                {
-                    File.Delete(filePath);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+
+                File.Delete(filePath);
             }
-            catch (Exception)
-            {
-                return false;
-            }
+            catch (Exception){}
         }
     }
 }

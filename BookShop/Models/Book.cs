@@ -32,9 +32,6 @@ namespace BookShop.Models
 
         public string? image { get; set; }
 
-        [Required(ErrorMessage = "Publishing year is required")]
-        public string publishing_year { get; set; }
-
         [Required(ErrorMessage = "Price is required")]
         public float price { get; set; }
 

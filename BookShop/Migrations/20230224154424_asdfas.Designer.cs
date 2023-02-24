@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShop.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230221130631_asdf")]
-    partial class asdf
+    [Migration("20230224154424_asdfas")]
+    partial class asdfas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,10 +48,6 @@ namespace BookShop.Migrations
 
                     b.Property<float>("price")
                         .HasColumnType("real");
-
-                    b.Property<string>("publishing_year")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("quantity")
                         .HasColumnType("int");

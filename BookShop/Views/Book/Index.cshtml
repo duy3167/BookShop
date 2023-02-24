@@ -4,7 +4,7 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/admin/book.css">
+    <link rel="stylesheet" href="~/css/admin/book.css" asp-append-version="true">
 }
 
 @model IEnumerable<Book>
@@ -43,104 +43,45 @@
                          <h6>Price: @book.price$</h6>
                          <h6>Quantity:@book.quantity</h6>
                         <h6 style="text-align:justify">
-                            Description:There may be references in this publication to other publications currently under development by NIST in
-                            accordance with its assigned statutory responsibilities. The information in this publication, including concepts and
-                            methodologies, may be used by federal agencies even before the completion of such companion publications. Thus,
-                            until each publication is completed, current requirements, guidelines, and procedures, where they exist, remain
-                            operative. For planning and transition purposes, federal agencies may wish to closely follow the development of
-                            these new publications by NIST.
+                           @book.description
                         </h6>
                      </div>
                  </div>
                  <div class="col-2" style="text-align: center">
                      <div style="margin-top:50%">
-                         <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.book_id"></a> <button class="btn btn-info">Update</button>
-                        <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.book_id" onclick="return confirm('Delete this book?')"><button class="btn btn-danger btn-delete-book">Delete</button></a>
+                        <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.book_id"><button class="btn btn-info">Update</button></a>
+                        <button class="btn btn-danger btn-delete-book" data-book-id="@book.book_id" data-bs-toggle="modal" data-bs-target="#confirm_delete_modal">Delete</button>
                      </div>
                  </div>
             </div>
         </div>
     }
 </div>
-<!-- model-->
-<div class="modal fade" id="new_pro_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog  modal-dialog-centered modal-lg">
+<div class="modal fade" id="confirm_delete_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Add product</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirm</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div style="padding:1rem">
-                <form action="/product-add" method="post" id="pro_form">
-                    <div class="mb-4">
-                        <label for="pro_name" class="form-label">Name</label>
-                        <input type="text" name="proName" class="form-control" id="pro_name" placeholder="product name" style="display: inline-block" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="pro_cate" class="form-label">Category</label>
-                        <select class="form-control" name="cateId" id="pro_cate" style="display: inline-block" required>
-                            <option value="">Choose category</option>
-                            <% for (let i=0;i < cateList.length;i++) {%>
-                            <option value="<%= cateList[i].cate_id %>"><%= cateList[i].cate_name %></option>
-                            <% }%>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="pro_sup" class="form-label">Supplier</label>
-                        <select class="form-control" name="supId" id="pro_sup" style="display: inline-block" required>
-                            <option value="">Choose supplier</option>
-                            <% for (let i=0;i < supList.length;i++) {%>
-                            <option value="<%= supList[i].sup_id %>"><%= supList[i].sup_name %></option>
-                            <% }%>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="pro_price" class="form-label">Price</label>
-                        <input type="number" name="price" class="form-control" id="pro_price" placeholder="price" style="display: inline-block" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="pro_quantity" class="form-label">Quantity</label>
-                        <input type="number" name="quantity" class="form-control" id="pro_quantity" placeholder="quantity" style="display: inline-block" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="img_preview" class="form-label" id="lb_img">Image</label>
-                        <div style="display: block">
-                            <img src="/images/demo-image.jpg" alt="..." class="img-thumbnail" id="img_preview" style="width: 13rem;">
-                        </div>
-                        <input type="file" name="proImage" id="pro_img" hidden>
-                        <button type="button" class="btn btn-primary mt-3" id="btn_open_dialog_image">Choose image</button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
+            <div class="modal-body">
+                <div>Delete this book?</div>
+            </div>
+            <div class="modal-footer">
+                <form asp-controller="Book" asp-action="Delete" method="post">
+                    <input type="hidden" value="" name="id" id="input_book_id">
+                    <button type="submit" class="btn btn-danger btn-ok-delete">Delete</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- confirm delete model -->
-<button type="button" id="btn_show_confirm_delete" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" hidden>
-</button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="content_confirm_delete">
-                Delete this product
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="btn_ok_delete" class="btn btn-primary">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- confirm delete model -->
-
 @section Scripts{
-
+    <script>
+        $(document).ready(function () {
+            $('.btn-delete-book').click(function () {
+                $('#input_book_id').val($(this).data('book-id'))
+            })
+        })
+    </script>
 }

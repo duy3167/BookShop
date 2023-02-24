@@ -43,7 +43,7 @@ namespace BookShop.Utils
         //authentication user
         public bool Authorization(HttpContext httpContext, string zones)
         {
-            if (BindingSession(httpContext) == true)
+            if (BindingSession(httpContext))
             {
                 List<string> zoneList = zones.Split(',').ToList();
                 foreach (string zone in zoneList)
@@ -58,6 +58,7 @@ namespace BookShop.Utils
         }
 
 
+        //create user session  for authentication
         public void SetSession(int userId, string email, string role, HttpContext httpContext)
         {
             httpContext.Session.SetInt32(KeyId, userId);

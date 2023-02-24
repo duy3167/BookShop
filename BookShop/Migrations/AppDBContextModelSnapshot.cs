@@ -47,10 +47,6 @@ namespace BookShop.Migrations
                     b.Property<float>("price")
                         .HasColumnType("real");
 
-                    b.Property<string>("publishing_year")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 

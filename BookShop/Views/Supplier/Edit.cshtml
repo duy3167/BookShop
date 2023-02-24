@@ -2,16 +2,17 @@
     ViewData["Title"] = "Supplier";
     Layout = "_ManagementLayout";
 }
+@model Supplier
 
-<form action="/supplier-add" method="post" id="sup_form">
-    <div class="modal-body">
-        <label for="txt_sup_name">Supplier name</label>
-        <input type="text" placeholder="supplier name" id="txt_sup_name" class="form-control mb-1" required>
-        <label for="txt_address">Address</label>
-        <input type="text" placeholder="supplier address" id="txt_address" class="form-control" required>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Update</button>
+<form asp-controller="Supplier" asp-action="Edit" method="post">
+    <label for="txt_sup_name">Category name</label>
+    <input type="hidden" asp-for="sup_id">
+    <input type="text" asp-for="name" placeholder="supplier name" class="form-control mb-1" required>
+    <input type="text" asp-for="address" placeholder="address" class="form-control mb-1" required>
+    <div style="float: right;">
+        <button type="submit" class="btn btn-success">Add</button>
+        <a asp-action="Index" asp-controller="Supplier">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+        </a>
     </div>
 </form>

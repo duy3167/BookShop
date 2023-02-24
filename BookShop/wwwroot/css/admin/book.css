@@ -44,7 +44,7 @@ body {
 .item {
     display: inline-block;
     height: fit-content;
-    width: 63rem;
+    width: 98%;
     padding: 0;
     margin-top: 5px;
     margin: 15px;
