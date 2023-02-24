@@ -53,7 +53,9 @@
 	            				<button type="submit" class="btn form-control btn-primary rounded submit px-3">Login</button>
 							</div>
 						</form>
-						<a asp-controller="Home" asp-action="Index" style=";">Home</a>
+						<div id="btn_forget_pass" style="cursor:pointer">
+							Forget password?
+						</div>
 							<a asp-controller="Home" asp-action="Register" style="float: right;">Register</a>
 
 				</div>
@@ -61,7 +63,35 @@
 			</div>
 		</div>
 	</section>
+	<button type="button" id="btn_open_forget_pass_modal" data-bs-toggle="modal" data-bs-target="#forget_pass_modal" hidden>
+	</button>
+	<div class="modal fade" id="forget_pass_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<form asp-controller="Request" asp-action="RequestResetPass">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">Forget password</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<input id="txt_email_reset_pass" type="email" placeholder="enter email" class="form-control">
+				</div>
+				<div class="modal-footer">
+					<button id="btn_send_request_reset_pass" type="button" class="btn btn-primary">Reset password</button>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
 </body>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('#btn_forget_pass').click(function(){
+				$('#btn_open_forget_pass_modal').click()
+			})
+
+		})
+	</script>
 </html>
 
