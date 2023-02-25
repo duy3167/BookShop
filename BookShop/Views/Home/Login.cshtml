@@ -12,6 +12,7 @@
 	<link rel="icon" href="/images/icon-web.png">
 	<link rel="stylesheet" href="~/css/customer/login.css">
 	<link rel="stylesheet" href="~/css/share/loading-animation.css">
+
   </head>
 	<body>
 <!-- animation loading-->
@@ -67,23 +68,28 @@
 	</button>
 	<div class="modal fade" id="forget_pass_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
-			<form asp-controller="Request" asp-action="RequestResetPass">
+			<form asp-controller="Request" asp-action="RequestResetPass" method="post">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="staticBackdropLabel">Forget password</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<h1 class="modal-title fs-5" id="staticBackdropLabel" stype="font-size: 18px;">Forget password</h1>
 				</div>
 				<div class="modal-body">
-					<input id="txt_email_reset_pass" type="email" placeholder="enter email" class="form-control">
+					<input id="txt_email_reset_pass" name="email" type="email" placeholder="email" class="form-control" style="color: black!important;">
 				</div>
 				<div class="modal-footer">
-					<button id="btn_send_request_reset_pass" type="button" class="btn btn-primary">Reset password</button>
+					<button type="submit" type="button" class="btn btn-primary">Reset password</button>
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="background:#000232!important" aria-label="Close">Close</button>
 				</div>
 			</div>
 			</form>
 		</div>
 	</div>
 </body>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<!-- popper js -->
+	<script src="~/lib/popper/popper.min.js"></script>
+	<!-- bootstrap js -->
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script>
 		$(document).ready(function(){

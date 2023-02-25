@@ -37,7 +37,8 @@ namespace BookShop.Controllers
         public IActionResult Detail(int id)
         {
             this.HasSession();
-            Book book = dbContext.books.Where(b => b.book_id == id).FirstOrDefault();
+            Book book = dbContext.books.Where(b => b.book_id == id && b.book_id == 1)
+                .Include(c => c.category).Include(s => s.supplier).FirstOrDefault();
             if(book != null)
             {
                 return View(book);

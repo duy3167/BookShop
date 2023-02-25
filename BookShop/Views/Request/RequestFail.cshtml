@@ -20,15 +20,14 @@
     <div class='c'>
         <div class='_404'>404</div>
         <hr>
-        <div class='_1'>THE PAGE</div>
-        <div class='_2'>WAS NOT FOUND</div>
-        <a class='btn btn-back'>BACK TO PREVIOUS PAGE</a>
+        <div class='_2'>@ViewBag.message</div>
+        <a class='btn btn-back' href='/'>BACK TO PREVIOUS PAGE</a>
     </div>
 </body>
 <script src="/lib/jquery/dist/jquery.min.js"></script>
 <script>
-    $(document).ready(function(){
-        $('.btn-back').click(function(){
+    $(document).ready(function () {
+        $('.btn-back').click(function () {
             if (history.length > 1) {
                 history.back();
             } else {
