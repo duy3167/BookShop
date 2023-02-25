@@ -15,7 +15,7 @@ namespace BookShop.Controllers
         public BookController(AppDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.zone = "owner, admin";
+            this.zone = "owner,admin";
         }
 
         public IActionResult Index()

@@ -12,7 +12,7 @@ namespace BookShop.Controllers
         public CategoryController(AppDBContext dbContext)
         {
             this.dbContext = dbContext;
-            this.zone = "owner, admin";
+            this.zone = "owner,admin";
         }
 
         [HttpGet]
