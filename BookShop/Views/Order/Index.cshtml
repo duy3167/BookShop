@@ -7,6 +7,8 @@
 	
 }
 
+@model IEnumerable<Order>
+
 <table class="table table-hover" style="text-align:center">
     <thead>
         <tr>
@@ -20,18 +22,18 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < 10; i++)
+        @foreach (Order order in Model)
         {
             <tr>
-                <th scope="row">@(i + 1)</th>
-                <td>Cust name @i</td>
-                <td>0123456789</td>
-                <td>cust address @i</td>
-                <td>$123</td>
-                <td>11/11/1111</td>
+                <th scope="row">@order.order_id</th>
+                <td>@order.user.email</td>
+                <td>@order.user.phone</td>
+                <td>@order.user.address</td>
+                <td>$@order.total</td>
+                <td>@order.order_date.ToShortDateString()</td>
                 <td>
-                    <a asp-controller="Order" asp-action="Detail">
-                        <button class="btn btn-info" data-pro-id="@i">Detail</button>
+                    <a asp-controller="Order" asp-action="Detail" asp-route-id="@order.order_id">
+                        <button class="btn btn-info">Detail</button>
                     </a>
 
                 </td>

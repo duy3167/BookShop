@@ -3,6 +3,8 @@
 	Layout = "_ManagementLayout";
 }
 
+@model IEnumerable<OrderDetail>
+
 <table class="table table-hover pt-10">
     <thead>
         <tr>
@@ -15,17 +17,17 @@
         </tr>
     </thead>
     <tbody id="body-order-detail-table">
-        @for (int i = 0; i < 5; i++)
+        @foreach (OrderDetail od in Model)
         {
             <tr>
-                <th scope="row">@(i + 1)</th>
-                <th>book title</th>
+                <th scope="row">@od.order_detail_id</th>
+                <th>@od.book.title</th>
                 <th>
-                    <img src="~/img/book/book_demo.jpg" style="width:8rem; height:9rem" />
+                    <img src="~/img/book/@od.book.image" style="width:8rem; height:9rem" />
                 </th>
-                <th>$123</th>
-                <th>1</th>
-                <th>$123</th>
+                <th>$@od.book.price</th>
+                <th>@od.quantity</th>
+                <th>$@(od.book.price * od.quantity)</th>
             </tr>
         }
     </tbody>
