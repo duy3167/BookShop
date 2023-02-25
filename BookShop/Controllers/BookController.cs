@@ -144,10 +144,6 @@ namespace BookShop.Controllers
 
             if (deleteBook != null)
             {
-                string fileName = deleteBook.image;
-                string folder = "img/book";
-                FileHandler.Instance.DeleteFileAsync(fileName, folder);
-
                 deleteBook.status = 0;
                 dbContext.SaveChanges();
                 return RedirectToAction("Index");
