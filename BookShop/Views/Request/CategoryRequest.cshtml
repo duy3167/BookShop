@@ -21,16 +21,17 @@
                     <th scope="row">@cate.cate_id</th>
                     <td>@cate.name</td>
                     <td>
-                            <form asp-action="AcceptCate" asp-controller="Request" method="post">
-                                <input type="hidden" value="@cate.cate_id">
-                                <button class="btn btn-info">Accept</button>
-                            </form>
+                            <div class="btn-group" role="group">
+                                <form asp-action="AcceptCate" asp-controller="Request" method="post">
+                                    <input type="hidden" name="id" value="@cate.cate_id">
+                                    <button class="btn btn-info">Accept</button>
+                                </form>
 
-                            <form asp-action="RejectCate" asp-controller="Request">
-                            <input type="hidden" value="@cate.cate_id">
-                                <button class="btn btn-danger" ="@cate.cate_id">Reject</button>
-                            </form>
-                          
+                                <form asp-action="RejectCate" asp-controller="Request">
+                                <input type="hidden" name="id" value="@cate.cate_id">
+                                    <button class="btn btn-danger" ="@cate.cate_id">Reject</button>
+                                </form>
+                          </div>
                     </td>
 
                 </tr>

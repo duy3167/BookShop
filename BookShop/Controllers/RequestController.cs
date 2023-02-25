@@ -64,7 +64,7 @@ namespace BookShop.Controllers
 		public IActionResult CustomerRequest()
 		{
 			if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
-            List<User> userList = dbContext.users.Where(u => u.status == 1 && u.role == "owner").ToList();
+            List<User> userList = dbContext.users.Where(u => u.status == 1 && u.role == "client").ToList();
             return View(userList);
 		}
 
@@ -75,6 +75,7 @@ namespace BookShop.Controllers
 			if(user != null)
 			{
 				user.status = 1;
+				dbContext.SaveChanges();
 				ViewBag.message = $"Request is processing for email: {email}";
 				return View("RequestSuccess");
 			}
@@ -91,6 +92,8 @@ namespace BookShop.Controllers
 			if (user != null)
 			{
 				user.password = "000000";
+				user.status = 0;
+				dbContext.SaveChanges();
 				if (user.role == "client")
 				{
 					return RedirectToAction("CustomerRequest");

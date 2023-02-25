@@ -17,8 +17,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @try
-                    {
                         @foreach (User user in Model)
                         {
                             <tr>
@@ -29,20 +27,14 @@
                                 <td>
                                     <div class="btn-group" role="group">
                                         <form asp-action="AcceptResetPass" asp-controller="Request" method="post">
-                                            <input type="hidden" value="@user.user_id">
-                                            <button class="btn btn-danger">Change password</button>
+                                            <input type="hidden" name="email" value="@user.email">
+                                            <button class="btn btn-success">Change password</button>
                                         </form>
                                     </div>
 
                                 </td>
                             </tr>
                         }
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
                 </tbody>
             </table>
         </div>
