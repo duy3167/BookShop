@@ -36,9 +36,9 @@
                     <div id="title_dashboard"><h1 class="animate-character">ADMIN</h1></div>
                 </div>
                 <div id="body_dashboard">
-                    <a asp-controller="Category" asp-action="Index" style="text-decoration: none"><div class="controller-in-dashboard @CurrentPage("Category")"><i class="bi-tag-fill" aria-hidden="true"></i> Category </div></a>
-                    <a asp-controller="Supplier" asp-action="Index" style="text-decoration: none"><div class="controller-in-dashboard @CurrentPage("Customer")"><i class="bi-playstation" aria-hidden="true"></i> Customer </div></a>
-                    <a asp-controller="Order" asp-action="Index" style="text-decoration: none"><div class="controller-in-dashboard @CurrentPage("Owner")"><i class="bi-box-seam-fill" aria-hidden="true"></i> Owner </div></a>
+                    <a asp-controller="Request" asp-action="CategoryRequest" style="text-decoration: none"><div class="controller-in-dashboard @CurrentPage("Category")"><i class="bi-tag-fill" aria-hidden="true"></i> Category </div></a>
+                    <a asp-controller="Request" asp-action="CustomerRequest" style="text-decoration: none"><div class="controller-in-dashboard @CurrentPage("Customer")"><i class="bi-playstation" aria-hidden="true"></i> Customer </div></a>
+                    <a asp-controller="Request" asp-action="OwnerRequest" style="text-decoration: none"><div class="controller-in-dashboard @CurrentPage("Owner")"><i class="bi-box-seam-fill" aria-hidden="true"></i> Owner </div></a>
                     <a asp-controller="Home" asp-action="Index" style="text-decoration: none"><div class="controller-in-dashboard"><i class="bi-browser-chrome" aria-hidden="true"></i> Website </div></a>
                     <a asp-controller="Home" asp-action="Logout" style="text-decoration: none; color: black"><div class="controller-in-dashboard"><i class="bi-box-arrow-left" aria-hidden="true"></i> Logout</div></a>
                 </div>
