@@ -6,53 +6,49 @@
 @section Styles{
     <link href="~/css/share/animation-loading.css" asp-append-version="true"/>
 }
+@model IEnumerable<Book>
 
 
 <!-- book section -->
 
-<section class="shop_section layout_padding">
+<section class="shop_section layout_padding" style="min-height: 49rem;">
     <div class="container">
         <div class="heading_container heading_center">
             <h2>
                 Product list
             </h2>
         </div>
-        <div id="search-area" style="transform: translateX(50%);">
-            <nav class="navbar">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="d-flex" id="search_box_product" role="search">
-                            <input class="form-control me-2" id="txt_search_pro" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" id="btn_search_product">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+        <div id="search-area" style="text-align: center;">
+                <form asp-action="SearchBook" asp-controller="Home" method="get">
+                <input class="form-control me-2" style="width: 20rem;display: inline-block;" name="title" id="txt_search_pro" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" id="btn_search_product">Search</button>
+                </form>
         </div>
+
         <div class="row" id="body_pro_list">
-            @for (int i = 0; i < 10; i++)
+            @foreach (Book book in Model)
             {
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="box">
-                        <a asp-controller="Home" asp-action="detail" asp-route-id="1">
+                        <a asp-controller="Home" asp-action="detail" asp-route-id="@book.book_id">
                             <div class="img-box">
-                                <img src="~/img/book/book_demo.jpg" alt="">
+                                <img src="~/img/book/@book.image" alt="">
                             </div>
                             <div class="detail-box">
                                 <a id="pro_name">
-                                    proName @i
+                                    @book.title
                                 </a>
                                 <h6 id="cate_name">
-                                    Category: cateName @i
+                                    Category: @book.category.name
                                 </h6>
                                 <h6 id="sup_name">
-                                    Supplier: supName @i
+                                    Supplier: @book.supplier.name
                                 </h6>
                                 <h6 id="auth_name">
-                                    Author: authName @i
+                                    Author: @book.author
                                 </h6>
                                 <h6 id="price">
-                                    Price: 12@(i)
+                                    Price: $@book.price
                                 </h6>
                             </div>
                         </a>

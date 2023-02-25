@@ -13,16 +13,19 @@ namespace BookShop.Controllers
         {
             this.dbContext = dbContext;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             this.HasSession();
             ICollection<Book> bookList = dbContext.books
                                .Where(b => b.status == 1)
                                .Include(c => c.category)
-                               .Include(s => s.supplier).ToList();
+                               .Include(s => s.supplier).Take(4).ToList();
             return View(bookList);
         }
 
+        [HttpGet]
         public IActionResult Book()
         {
             this.HasSession();
@@ -34,16 +37,27 @@ namespace BookShop.Controllers
             return View(bookList);
         }
 
+        [HttpGet]
         public IActionResult Detail(int id)
         {
             this.HasSession();
-            Book book = dbContext.books.Where(b => b.book_id == id && b.book_id == 1)
+            Book book = dbContext.books.Where(b => b.book_id == id && b.status == 1)
                 .Include(c => c.category).Include(s => s.supplier).FirstOrDefault();
             if(book != null)
             {
                 return View(book);
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult SearchBook([FromQuery(Name = "title")]string title)
+        {
+            this.HasSession();
+            List<Book> bookList = dbContext.books.Where(b => b.title.Contains(title) && b.status == 1)
+                .Include(c => c.category).Include(s => s.supplier).ToList();
+
+            return View("Book", bookList);
         }
 
         [HttpGet]
