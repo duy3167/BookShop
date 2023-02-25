@@ -1,58 +1,87 @@
-﻿@{
+﻿@using BookShop.Repository;
+@{
     ViewData["Title"] = "Cart";
     Layout = "_CustomerLayout";
+	float total = 0;
 }
 
 @section Styles{
-	<link href="~/css/customer/cart.css" rel="stylesheet" />
+	<link href="~/css/customer/cart.css" rel="stylesheet" asp-append-version="true" />
 }
+
+@model CheckoutViewModel
+
 <div class="card">
 	<div class="row">
 		<div class="col-md-7 cart">
 			<div class="title">
 				<div class="row">
 					<div class="col-8"><h4><b style="color: rgb(61, 194, 202)">Shopping Cart</b></h4></div>
-					<div class="col-2 align-self-center text-right text-muted">5 items</div>
+					<div class="col-2 align-self-center text-right text-muted">@(((List<OrderDetailViewModel>)ViewData["cartList"]).Count) item</div>
 					<div class="col-2 align-self-center text-right text-muted" style="cursor:pointer">
 						<a asp-controller="Cart" asp-action="History" style="color: #6c757d!important">History</a>
 					</div>
 				</div>
 			</div>
-			@for (int i = 0; i < 5; i++)
+			@foreach (OrderDetailViewModel od in (List<OrderDetailViewModel>)ViewData["cartList"])
 			{
 				<div class="row">
 					<div class="row main align-items-center">
-						<div class="col-2"><img class="img-fluid" src="~/img/book/book_demo.jpg"></div>
+						<div class="col-2"><img class="img-fluid" src="~/img/book/@od.image"></div>
 						<div class="col">
-							<div class="row text-muted">Book Name</div>
-							<div class="row">Author name</div>
+							<div class="row text-muted">@od.title</div>
 						</div>
 						<div class="col">
-							<a>-</a>
-								<a class="border">1</a>
-							<a>+</a>
+							<a asp-controller="Cart" asp-action="DownQuantity" asp-route-id="@od.order_detail_id">-</a>
+								<a class="border">@od.quantity</a>
+							<a asp-controller="Cart" asp-action="UpQuantity" asp-route-id="@od.order_detail_id">+</a>
 						</div>
-						<div class="col">$ 10.00 <span class="close">&#10005;</span></div>
+						<div class="col">$ @(od.price * od.quantity) <a asp-action="Remove" asp-controller="Cart" asp-route-id="@od.order_detail_id"><span class="close">&#10005;</span></a></div>
 					</div>
 				</div>
+				{
+					total += od.total;
+				}
 			}
 		</div>
 		<div class="col-md-5 summary">
 			<div><h5><b>Summary</b></h5></div>
 			<hr>
 			<div class="row">
-				<div class="col-2" style="padding-left:0;">PHONE</div>
-				<div class="col-10 text-right" style="padding-left:1rem;">Phone of customer</div>
+				<div class="col-4" style="padding-left:0;">EMAIL</div>
+				<div class="col-8 text-right" style="padding-left:1rem;">@Model.email</div>
 			</div>
 			<div class="row">
-				<div class="col-2" style="padding-left:0;">ADDRESS</div>
-				<div class="col-10 text-right" style="padding-left:1rem;">Address of customer</div>
+				<div class="col-4" style="padding-left:0;">PHONE</div>
+				<div class="col-8 text-right" style="padding-left:1rem;">@Model.phone</div>
+			</div>
+			<div class="row">
+				<div class="col-4" style="padding-left:0;">ADDRESS</div>
+				<div class="col-8 text-right" style="padding-left:1rem;">@Model.address</div>
+			</div>
+			<div class="row">
+				<div class="col-4" style="padding-left:0;">ORDER DATE</div>
+				<div class="col-8 text-right" style="padding-left:1rem;">@DateTime.Now.ToShortDateString()</div>
+			</div>
+			<div class="row">
+				<div class="col-4" style="padding-left:0;">DELIVERY DATE</div>
+				<div class="col-8 text-right" style="padding-left:1rem;">@DateTime.Now.AddDays(3).ToShortDateString()</div>
 			</div>
 			<div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
 				<div class="col">TOTAL PRICE</div>
-				<div class="col text-right">$50.00</div>
+				<div class="col text-right">$ @total</div>
 			</div>
-			<button class="btn">CHECKOUT</button>
+				@if(( (List<OrderDetailViewModel>) ViewData["cartList"] ).Count != 0)
+				{
+				<a asp-action="CheckOut" asp-controller="Cart" asp-route-id="@ViewBag.orderId">
+						<button class="btn">CHECKOUT</button>
+					</a>
+				}
+				else
+				{
+				<button class="btn bg-secondary" style="cursor:default">CHECKOUT</button>
+				}
+
 		</div>
 	</div>
 

@@ -4,32 +4,33 @@
 }
 
 @section Styles{
-    <link href="~/css/customer/cart.css" rel="stylesheet" />
+	<link href="~/css/customer/cart.css" rel="stylesheet"  asp-append-version="true" />
 }
+@using BookShop.Repository
+@model IEnumerable<OrderDetailViewModel>
 
-<div class="card">
+<div class="card" style="min-height: 32rem;">
 	<div class="row">
-		<div class="col cart">
+		<div class="col cart" style="padding: 3rem">
 			<div class="title">
 				<div class="row">
 					<div class="col-11"><h4><b style="color: rgb(61, 194, 202)">History</b></h4></div>
-					<div class="col-1 align-self-center text-right text-muted">5 items</div>
+					<div class="col-1 align-self-center text-right text-muted">@Model.Count() items</div>
 				</div>
 			</div>
-			@for (int i = 0; i < 5; i++)
+			@foreach (OrderDetailViewModel od in Model)
 			{
 				<div class="row">
-					<div class="row main align-items-center">
-						<div class="col-2"><img class="img-fluid" src="~/img/book/book_demo.jpg"></div>
+					<div class="row main align-items-center" style="text-align:center">
+						<div class="col-2"><img class="img-fluid" src="~/img/book/@od.image"></div>
 						<div class="col">
-							<div class="row text-muted">Book Name</div>
-							<div class="row">Author name</div>
+							<div class="row text-muted">@od.title</div>
 						</div>
 						<div class="col">
-							<a class="">1</a>
+							<a class="">@od.quantity</a>
 						</div>
-						<div class="col">$ 10.00</div>
-						<div class="col">11/11/1111</div>
+						<div class="col">$@od.price</div>
+						<div class="col">@od.date.ToShortDateString()</div>
 					</div>
 				</div>
 			}

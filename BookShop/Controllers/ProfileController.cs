@@ -21,17 +21,18 @@ namespace BookShop.Controllers
         public IActionResult Index()
         {
             if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
+			ViewData["isLogin"] = true;
 
-            string email = Authentication.Instance.email;
-            UserViewModel user = dbContext.users.Select(p => new UserViewModel
-            {
-                email = p.email,
-                address = p.address,
-                phone = p.phone,
-                gender = p.gender,
-            }).Where(u => u.email == email).FirstOrDefault();
+			string email = Authentication.Instance.email;
+            UserViewModel user = dbContext.users
+                                .Select(p => 
+                                new UserViewModel {
+                                     email = p.email,
+                                     address = p.address,
+                                     phone = p.phone,
+                                     gender = p.gender,
+                                }).Where(u => u.email == email).FirstOrDefault();
 
-            ViewBag.loggedIn = true;
             return View(user);
         }
 
