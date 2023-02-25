@@ -71,7 +71,9 @@ namespace BookShop.Controllers
 		[HttpPost]
 		public IActionResult RequestResetPass(string email)
 		{
-			User user = dbContext.users.Where(u => u.email == email).FirstOrDefault();
+            if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
+
+            User user = dbContext.users.Where(u => u.email == email).FirstOrDefault();
 			if(user != null)
 			{
 				user.status = 1;
@@ -87,7 +89,9 @@ namespace BookShop.Controllers
 		[HttpPost]
 		public IActionResult AcceptResetPass(string email)
 		{
-			User user = dbContext.users.Where(u => u.email == email && u.status == 1).FirstOrDefault();
+            if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
+
+            User user = dbContext.users.Where(u => u.email == email && u.status == 1).FirstOrDefault();
 
 			if (user != null)
 			{
