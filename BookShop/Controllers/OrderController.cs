@@ -20,7 +20,7 @@ namespace BookShop.Controllers
         {
 			if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
 
-			var orderList = dbContext.orders.Include("user").ToList();
+			var orderList = dbContext.orders.Where(o =>o.status == 1).Include("user").ToList();
 			return View(orderList);
         }
 

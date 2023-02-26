@@ -25,7 +25,7 @@ namespace BookShop.Controllers
 			ViewData["isLogin"] = true;
 
 			int userId = Authentication.Instance.userId;
-			int orderId = await this.GetOrderId(userId);
+			int orderId = this.GetOrderId(userId);
 
 			ViewData["cartList"] = await dbContext.orderDetails.Include("book")
 										.Join(dbContext.orders, od => od.order_id, o => o.order_id, (od, o)
@@ -61,11 +61,11 @@ namespace BookShop.Controllers
 			return View(checkoutInfor);
         }
 
-		private async Task<int> GetOrderId(int userId)
+		private  int GetOrderId(int userId)
 		{
-			Order order = await dbContext.orders
+			Order order = dbContext.orders
 					.Where(o => o.user_id == userId && o.status == 0)
-					.FirstOrDefaultAsync();
+					.FirstOrDefault();
 
 			if (order == null)
 			{
@@ -73,7 +73,7 @@ namespace BookShop.Controllers
 				newOrder.user_id = userId;
 				newOrder.status = 0;
 				dbContext.Add(newOrder);
-				dbContext.SaveChangesAsync();
+				dbContext.SaveChanges();
 				return newOrder.order_id;
 			}
 			else
