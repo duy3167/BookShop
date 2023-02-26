@@ -129,7 +129,6 @@ namespace BookShop.Controllers
 				}
             }
 
-			return View();
 			return View(user);
 		}
 
