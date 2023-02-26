@@ -26,7 +26,7 @@ namespace BookShop.Controllers
 
 			int userId = Authentication.Instance.userId;
 			int orderId = this.GetOrderId(userId);
-
+		
 			ViewData["cartList"] = await dbContext.orderDetails.Include("book")
 										.Join(dbContext.orders, od => od.order_id, o => o.order_id, (od, o)
 										=> new OrderDetailViewModel

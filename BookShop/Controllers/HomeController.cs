@@ -22,6 +22,7 @@ namespace BookShop.Controllers
                                .Where(b => b.status == 1)
                                .Include(c => c.category)
                                .Include(s => s.supplier).Take(4).ToList();
+
             return View(bookList);
         }
 
@@ -99,6 +100,7 @@ namespace BookShop.Controllers
             {
                 ViewData["isLogin"] = true;
             }
+
         }
 
         [HttpGet]
@@ -128,6 +130,7 @@ namespace BookShop.Controllers
             }
 
 			return View();
+			return View(user);
 		}
 
         [HttpGet]

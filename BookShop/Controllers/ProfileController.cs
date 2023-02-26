@@ -21,6 +21,7 @@ namespace BookShop.Controllers
         public IActionResult Index()
         {
             if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
+
 			ViewData["isLogin"] = true;
 
 			string email = Authentication.Instance.email;
@@ -76,7 +77,6 @@ namespace BookShop.Controllers
 
                     return RedirectToAction("Index");
                 }
-
                 TempData["error"] = "Confirm password not match";
                 return RedirectToAction("Index");
             }

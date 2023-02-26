@@ -36,7 +36,7 @@
 								<a class="border">@od.quantity</a>
 							<a asp-controller="Cart" asp-action="UpQuantity" asp-route-id="@od.order_detail_id">+</a>
 						</div>
-						<div class="col">$ @(od.price * od.quantity) <a asp-action="Remove" asp-controller="Cart" asp-route-id="@od.order_detail_id"><span class="close">&#10005;</span></a></div>
+						<div class="col">$ @od.total <a asp-action="Remove" asp-controller="Cart" asp-route-id="@od.order_detail_id"><span class="close">&#10005;</span></a></div>
 					</div>
 				</div>
 				{
@@ -70,6 +70,8 @@
 			<div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
 				<div class="col">TOTAL PRICE</div>
 				<div class="col text-right">$ @total</div>
+			</div>
+				<div style="color:red">@TempData["error"]</div>
 			</div>
 				@if(( (List<OrderDetailViewModel>) ViewData["cartList"] ).Count != 0)
 				{
