@@ -51,11 +51,11 @@ namespace BookShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchBook([FromQuery(Name = "title")]string title)
+        public async Task<IActionResult> SearchBook([FromQuery(Name = "title")]string title)
         {
             this.HasSession();
-            List<Book> bookList = dbContext.books.Where(b => b.title.Contains(title) && b.status == 1)
-                .Include(c => c.category).Include(s => s.supplier).ToList();
+            List<Book> bookList = await dbContext.books.Where(b => b.title.Contains(title) && b.status == 1)
+                .Include(c => c.category).Include(s => s.supplier).ToListAsync();
 
             return View("Book", bookList);
         }
