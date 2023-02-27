@@ -167,13 +167,10 @@ namespace BookShop.Controllers
 			OrderDetail orderDetail = dbContext.orderDetails.Find(id);
 			if(orderDetail != null)
 			{
-				if (orderDetail.quantity > 0)
-				{
 					orderDetail.quantity++;
 					dbContext.Update(orderDetail);
 					dbContext.SaveChanges();
 					return RedirectToAction("Index");
-				}
 			}
 			return NotFound();
 		}
@@ -186,7 +183,7 @@ namespace BookShop.Controllers
 			OrderDetail orderDetail = dbContext.orderDetails.Find(id);
 			if (orderDetail != null)
 			{
-				if (orderDetail.quantity > 0)
+				if (orderDetail.quantity > 1)
 				{
 					orderDetail.quantity--;
 					dbContext.SaveChanges();

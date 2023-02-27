@@ -44,18 +44,19 @@
 <div class="modal fade" id="change_infor_model" tabindex="-1" aria-labelledby="change_infor_model" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content color-popup-model">
-            <form method="post" asp-controller="Profile" asp-action="ChangesInformation">
+            <form method="post" asp-controller="Profile" asp-action="ChangesInformation"  id="form_change_info">
                 <div class="modal-header">
                     <h1 class="modal-title title-model-custom" id="exampleModalLabel" style="font-size: 20px;font-weight: bold;">Change Information</h1>
                 </div>
                 <div class="modal-body body-model-custome">
                     <label for="user_phone" class="form-label">Phone</label>
-                    <input type="number" asp-for="phone" class="form-control" style="margin-bottom:1rem"/>
+                    <input id="txt_phone" type="number" asp-for="phone" class="form-control" style="margin-bottom:1rem" required/>
                     <label for="user_address" class="form-label">Address</label>
-                    <input type="text" asp-for="address" class="form-control" style="margin-bottom:1rem" />
+                    <input type="text" asp-for="address" class="form-control" style="margin-bottom:1rem" required />
                     <label for="user_gender" class="form-label">Gender</label>
                     <input type="radio" value="male" style="cursor:pointer; margin-left:2rem;"  asp-for="gender"/> <span >Male</span>
                     <input type="radio"  value="female" style="cursor:pointer; margin-left:2rem;" asp-for="gender" /> <span>Female</span>
+                    <div style="margin-left: 25%;color:red; font-size:13px" id="error_phone"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="height: 47px;">Cancel</button>
@@ -77,16 +78,16 @@
                 </div>
                 <div class="modal-body body-model-custome">
                     <label for="user_current_pass" class="form-label">Current password</label>
-                    <input name="currentPass" type="password" style="margin-bottom:1rem" id="user_current_pass" class="form-control" />
+                    <input name="currentPass" type="password" style="margin-bottom:1rem" id="user_current_pass" class="form-control" required />
                     <label for="user_new_pass" class="form-label">New password</label>
-                    <input name="newPass" type="password" style="margin-bottom:1rem" id="user_new_pass" class="form-control" />
+                    <input name="newPass" type="password" style="margin-bottom:1rem" id="user_new_pass" class="form-control" required />
                     <label for="user_confirm_pass" class="form-label">Confirm password</label>
-                    <input name="confirmPass" type="password" id="user_confirm_pass" class="form-control" />
+                    <input name="confirmPass" type="password" id="user_confirm_pass" class="form-control" required />
                     <span style="margin-left: 25%;color:red; font-size:13px" id="error_change_pass">@TempData["error"]</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal" style="height: 47px;">Cancel</button>
-                    <button type="submit" id="btn_ok_change_infor" class="btn btn-success" style="height: 47px;">Update</button>
+                    <button type="submit" id="btn_ok_change_pass" class="btn btn-success" style="height: 47px;">Update</button>
                 </div>
             </form>
         </div>
@@ -108,4 +109,14 @@
                 </script>
             }
         }
+
+        <script>
+            $('#form_change_info').submit(function (e){
+                 if ($('#txt_phone').val().length !== 10){
+                     e.preventDefault()
+                    $('#error_phone').html('phone must be 10 number')
+                }
+            })
+
+        </script>
 }

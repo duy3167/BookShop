@@ -47,10 +47,12 @@
         <div class="mb-4">
             <label for="pro_price" class="form-label">Price</label>
             <input type="number" asp-for="price" class="form-control"  style="display: inline-block" required>
+              <span style="color:red" id="error_price"></span>
         </div>
         <div class="mb-4">
             <label for="pro_quantity" class="form-label">Quantity</label>
             <input type="number" asp-for="quantity" class="form-control"   style="display: inline-block" required>
+                     <span style="color:red" id="error_quantity"></span>
         </div>
         <div class="mb-4">
             <label for="img_preview" class="form-label" id="lb_img">Image</label>
@@ -81,6 +83,20 @@
             $('#pro_img').change(function () {
                 imgHelper.previewImage()
             })
+
+            $('#pro_form').submit(function(e){
+                if($('#price').val() < 0){
+                    e.preventDefault()
+                    $('#error_price').html('Price must be positive number')
+                }
+
+                if($('#quantity').val() < 0){
+                    e.preventDefault()
+                    $('#error_quantity').html('Quantity must be positive number')
+                }
+            })
+
         })
+
     </script>
 }

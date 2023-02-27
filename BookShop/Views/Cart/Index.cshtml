@@ -72,17 +72,18 @@
 				<div class="col text-right">$ @total</div>
 			</div>
 				<div style="color:red">@TempData["error"]</div>
-			</div>
-				@if(( (List<OrderDetailViewModel>) ViewData["cartList"] ).Count != 0)
-				{
+			@if (((List<OrderDetailViewModel>)ViewData["cartList"]).Count != 0)
+			{
 				<a asp-action="CheckOut" asp-controller="Cart" asp-route-id="@ViewBag.orderId">
-						<button class="btn">CHECKOUT</button>
-					</a>
-				}
-				else
-				{
+					<button class="btn">CHECKOUT</button>
+				</a>
+			}
+			else
+			{
 				<button class="btn bg-secondary" style="cursor:default">CHECKOUT</button>
-				}
+			}
+			</div>
+
 
 		</div>
 	</div>

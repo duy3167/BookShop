@@ -22,6 +22,7 @@ namespace BookShop.Models
         public string gender { get; set; }
 
         [Required(ErrorMessage = "Phone is required")]
+        [StringLength(10, ErrorMessage = "phone must be 10 number")]
         public string phone { get; set; }
 
         [Required(ErrorMessage = "Address is required")]
