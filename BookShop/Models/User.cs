@@ -10,6 +10,7 @@ namespace BookShop.Models
         public int user_id { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email")]
         public string email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
