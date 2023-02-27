@@ -29,6 +29,10 @@ namespace BookShop.Controllers
 			if (!Authentication.Instance.Authorization(HttpContext, this.zone)) return Unauthorized();
 
 			var orderDetailList = dbContext.orderDetails.Include("order").Include("book").Where(od => od.order.order_id == id).ToList();
+			if(orderDetailList.Count == 0)
+			{
+				return NotFound();
+			}
 			return View(orderDetailList);
         }
 
