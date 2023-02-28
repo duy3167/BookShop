@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShop.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230224154424_asdfas")]
-    partial class asdfas
+    [Migration("20230227094458_asd")]
+    partial class asd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,7 +197,8 @@ namespace BookShop.Migrations
 
                     b.Property<string>("phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("role")
                         .HasColumnType("nvarchar(max)");

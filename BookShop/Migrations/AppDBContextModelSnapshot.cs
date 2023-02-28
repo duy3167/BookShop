@@ -195,7 +195,8 @@ namespace BookShop.Migrations
 
                     b.Property<string>("phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("role")
                         .HasColumnType("nvarchar(max)");

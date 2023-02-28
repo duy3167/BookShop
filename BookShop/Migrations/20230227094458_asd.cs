@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookShop.Migrations
 {
-    public partial class asdfas : Migration
+    public partial class asd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,7 @@ namespace BookShop.Migrations
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     role = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     status = table.Column<int>(type: "int", nullable: true)
                 },
