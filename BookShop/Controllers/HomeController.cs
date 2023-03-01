@@ -87,10 +87,8 @@ namespace BookShop.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-
             TempData["error"] = "Email or password wrong";
             return View();
-
         }
 
         private void HasSession()
