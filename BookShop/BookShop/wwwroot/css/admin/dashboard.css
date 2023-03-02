@@ -1,0 +1,95 @@
+﻿html, body {
+    height: 100%;
+}
+
+
+#block_dashboard {
+    width: 17rem;
+    height: 100%;
+    background-color: rgb(255,140,0);
+}
+
+#header_dashboard {
+    height: 4rem;
+    text-align: center;
+    padding-top: .5rem;
+    padding-right: 2rem;
+    padding-bottom: 1rem;
+}
+
+#title_dashboard {
+    display: inline-block;
+    font-size: 2.5rem;
+    vertical-align: text-top;
+    font-family: inherit;
+    margin-left: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+#root_body {
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 2rem;
+}
+
+.controller-in-dashboard {
+    width: 100%;
+    height: 4rem;
+    padding: 1rem;
+    padding-left: 2rem;
+    transition: padding-left .5s;
+    color: black;
+}
+
+    .controller-in-dashboard:hover {
+        cursor: pointer;
+        font-weight: bold;
+        padding-left: 5rem;
+        color: white;
+    }
+
+    .controller-in-dashboard.active {
+        font-weight: bold;
+        color: whitesmoke;
+    }
+
+
+/*================================responesive all*/
+@media (min-width: 640px) {
+}
+
+@media (min-width:960px) {
+}
+
+@media (min-width:1100px) {
+}
+
+/*// Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) {
+    body {
+        font-size: 1rem
+    }
+}
+
+/*// Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+    body {
+        font-size: 1rem
+    }
+}
+
+/*// Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+    body {
+        font-size: 1.2rem;
+    }
+}
+
+/*// Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+    body {
+        font-size: 1.3rem;
+    }
+}
+
