@@ -93,8 +93,8 @@ namespace BookShop.Controllers
 
         private void HasSession()
         {
-            Authentication.Instance.BindingSession(HttpContext);
-            if (Authentication.Instance.userId != 0)
+            
+            if (HttpContext.Session.Keys.Count() == 3)
             {
                 ViewData["isLogin"] = true;
             }
@@ -133,7 +133,7 @@ namespace BookShop.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("Id");
             return RedirectToAction("Login");
         }
 

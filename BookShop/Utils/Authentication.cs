@@ -30,7 +30,7 @@ namespace BookShop.Utils
         //get infor in session
         public bool BindingSession(HttpContext httpContext)
         {
-            if (!string.IsNullOrEmpty(httpContext.Session.GetString(KeyEmail)))
+            if (!string.IsNullOrEmpty(httpContext.Session.GetString(KeyId)))
             {
                 this.userId = (int)httpContext.Session.GetInt32(KeyId);
                 this.email = httpContext.Session.GetString(KeyEmail);

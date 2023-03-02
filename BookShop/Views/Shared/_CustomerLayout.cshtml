@@ -88,7 +88,7 @@
                              <a class="nav-link" asp-controller="Home" asp-action="Register">Register</a>
                         </li>
                         <li class="nav-item">
-                                @if (ViewData.ContainsKey("isLogin"))
+                                @if (ViewData.ContainsKey("isLogin") && (bool) ViewData["isLogin"] == true)
                                 {
                                     <a class="nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
                                 }
